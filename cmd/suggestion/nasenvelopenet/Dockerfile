@@ -1,4 +1,5 @@
-FROM python:3.6
+ARG ARCH
+FROM ${ARCH}/python:3.6
 
 ADD . /usr/src/app/github.com/kubeflow/katib
 WORKDIR /usr/src/app/github.com/kubeflow/katib/cmd/suggestion/nasenvelopenet
