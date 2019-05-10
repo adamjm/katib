@@ -17,7 +17,12 @@ dep ensure --vendor-only
 You can build all images from source.
 
 ```bash
-./scripts/v1alpha1/build.sh
+./scripts/v1alpha1/build.sh 
+```
+To build all images for a specific architecture.
+
+```bash
+./scripts/v1alpha1/build.sh ppc64le
 ```
 
 ## Implement new suggestion algorithm
