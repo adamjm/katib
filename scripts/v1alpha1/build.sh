@@ -20,30 +20,35 @@ set -o pipefail
 
 PREFIX="katib"
 CMD_PREFIX="cmd"
+ARCH="$(uname -m)"
+if [ "${ARCH}" = "x86_64" ]; then \
+    ARCH_NAME="amd64"
+elif [ "${ARCH}" = "ppc64le" ]; then \
+    ARCH_NAME= "ppc64le"
+fi
 
 SCRIPT_ROOT=$(dirname ${BASH_SOURCE})/../..
-
 cd ${SCRIPT_ROOT}
-
+--build-arg ARCH="ppc64le"
 echo "Building core image..."
-docker build -t ${PREFIX}/vizier-core -f ${CMD_PREFIX}/manager/Dockerfile .
-docker build -t ${PREFIX}/studyjob-controller -f ${CMD_PREFIX}/katib-controller/Dockerfile .
-docker build -t ${PREFIX}/metrics-collector -f ${CMD_PREFIX}/metricscollector/Dockerfile .
-docker build -t ${PREFIX}/tfevent-metrics-collector -f ${CMD_PREFIX}/tfevent-metricscollector/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/vizier-core -f ${CMD_PREFIX}/manager/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/studyjob-controller -f ${CMD_PREFIX}/katib-controller/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/metrics-collector -f ${CMD_PREFIX}/metricscollector/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/tfevent-metrics-collector -f ${CMD_PREFIX}/tfevent-metricscollector/Dockerfile .
 
 echo "Building REST API for core image..."
-docker build -t ${PREFIX}/vizier-core-rest -f ${CMD_PREFIX}/manager-rest/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/vizier-core-rest -f ${CMD_PREFIX}/manager-rest/Dockerfile .
 
 echo "Building suggestion images..."
-docker build -t ${PREFIX}/suggestion-random -f ${CMD_PREFIX}/suggestion/random/Dockerfile .
-docker build -t ${PREFIX}/suggestion-grid -f ${CMD_PREFIX}/suggestion/grid/Dockerfile .
-docker build -t ${PREFIX}/suggestion-hyperband -f ${CMD_PREFIX}/suggestion/hyperband/Dockerfile .
-docker build -t ${PREFIX}/suggestion-bayesianoptimization -f ${CMD_PREFIX}/suggestion/bayesianoptimization/Dockerfile .
-docker build -t ${PREFIX}/suggestion-nasrl -f ${CMD_PREFIX}/suggestion/nasrl/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/suggestion-random -f ${CMD_PREFIX}/suggestion/random/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/suggestion-grid -f ${CMD_PREFIX}/suggestion/grid/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/suggestion-hyperband -f ${CMD_PREFIX}/suggestion/hyperband/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/suggestion-bayesianoptimization -f ${CMD_PREFIX}/suggestion/bayesianoptimization/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/suggestion-nasrl -f ${CMD_PREFIX}/suggestion/nasrl/Dockerfile .
 
 echo "Building earlystopping images..."
-docker build -t ${PREFIX}/earlystopping-medianstopping -f ${CMD_PREFIX}/earlystopping/medianstopping/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/earlystopping-medianstopping -f ${CMD_PREFIX}/earlystopping/medianstopping/Dockerfile .
 
 echo "Building UI image..."
-docker build -t ${PREFIX}/katib-ui -f ${CMD_PREFIX}/ui/Dockerfile .
+docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/katib-ui -f ${CMD_PREFIX}/ui/Dockerfile .
 
