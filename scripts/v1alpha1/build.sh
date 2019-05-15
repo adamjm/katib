@@ -20,6 +20,7 @@ set -o pipefail
 
 PREFIX="katib"
 CMD_PREFIX="cmd"
+echo $1
 ARCH=$1
 
 if [ "${ARCH}" = "" ]; then \
