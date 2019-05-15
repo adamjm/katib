@@ -28,8 +28,6 @@ fi
 
 if [ "${ARCH}" = "x86_64" ]; then \
     ARCH="amd64"
-elif [ "${ARCH}" = "ppc64le" ]; then \
-    ARCH="ppc64le"
 fi
 
 SCRIPT_ROOT=$(dirname ${BASH_SOURCE})/../..

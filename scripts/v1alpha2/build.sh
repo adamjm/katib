@@ -27,14 +27,12 @@ if [ "${ARCH}" = "" ]; then \
 fi
 
 if [ "${ARCH}" = "x86_64" ]; then \
-    ARCH_NAME="amd64"
-elif [ "${ARCH}" = "ppc64le" ]; then \
-    ARCH_NAME="ppc64le"
+    ARCH="amd64"
 fi
 
 SCRIPT_ROOT=$(dirname ${BASH_SOURCE})/../..
 
 cd ${SCRIPT_ROOT}
 
-docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/katib-controller -f ${CMD_PREFIX}/katib-controller/Dockerfile .
-docker build --build-arg ARCH=${ARCH} --build-arg ARCH_NAME=${ARCH_NAME} -t ${PREFIX}/katib-manager -f ${CMD_PREFIX}/manager/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/katib-controller -f ${CMD_PREFIX}/katib-controller/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/katib-manager -f ${CMD_PREFIX}/manager/Dockerfile .
