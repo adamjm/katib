@@ -34,24 +34,24 @@ SCRIPT_ROOT=$(dirname ${BASH_SOURCE})/../..
 cd ${SCRIPT_ROOT}
 
 echo "Building core image..."
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/vizier-core -f ${CMD_PREFIX}/manager/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/studyjob-controller -f ${CMD_PREFIX}/katib-controller/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/metrics-collector -f ${CMD_PREFIX}/metricscollector/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/tfevent-metrics-collector -f ${CMD_PREFIX}/tfevent-metricscollector/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/vizier-core:${ARCH} -f ${CMD_PREFIX}/manager/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/studyjob-controller:${ARCH} -f ${CMD_PREFIX}/katib-controller/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/metrics-collector:${ARCH} -f ${CMD_PREFIX}/metricscollector/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/tfevent-metrics-collector:${ARCH} -f ${CMD_PREFIX}/tfevent-metricscollector/Dockerfile .
 
 echo "Building REST API for core image..."
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/vizier-core-rest -f ${CMD_PREFIX}/manager-rest/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/vizier-core-rest:${ARCH} -f ${CMD_PREFIX}/manager-rest/Dockerfile .
 
 echo "Building suggestion images..."
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-random -f ${CMD_PREFIX}/suggestion/random/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-grid -f ${CMD_PREFIX}/suggestion/grid/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-hyperband -f ${CMD_PREFIX}/suggestion/hyperband/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-bayesianoptimization -f ${CMD_PREFIX}/suggestion/bayesianoptimization/Dockerfile .
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-nasrl -f ${CMD_PREFIX}/suggestion/nasrl/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-random:${ARCH} -f ${CMD_PREFIX}/suggestion/random/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-grid:${ARCH} -f ${CMD_PREFIX}/suggestion/grid/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-hyperband:${ARCH} -f ${CMD_PREFIX}/suggestion/hyperband/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-bayesianoptimization:${ARCH} -f ${CMD_PREFIX}/suggestion/bayesianoptimization/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/suggestion-nasrl:${ARCH} -f ${CMD_PREFIX}/suggestion/nasrl/Dockerfile .
 
 echo "Building earlystopping images..."
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/earlystopping-medianstopping -f ${CMD_PREFIX}/earlystopping/medianstopping/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/earlystopping-medianstopping:${ARCH} -f ${CMD_PREFIX}/earlystopping/medianstopping/Dockerfile .
 
 echo "Building UI image..."
-docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/katib-ui -f ${CMD_PREFIX}/ui/Dockerfile .
+docker build --build-arg ARCH=${ARCH} -t ${PREFIX}/katib-ui:${ARCH} -f ${CMD_PREFIX}/ui/Dockerfile .
 
