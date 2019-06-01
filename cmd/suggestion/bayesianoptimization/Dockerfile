@@ -1,8 +1,9 @@
 ARG ARCH
-FROM ${ARCH}/python:3
+FROM ${ARCH}/python:3.6-stretch
 
 ADD . /usr/src/app/github.com/kubeflow/katib
 WORKDIR /usr/src/app/github.com/kubeflow/katib/cmd/suggestion/bayesianoptimization/v1alpha1
+RUN apt-get update && apt-get install -y libopenblas-dev 
 RUN pip install --no-cache-dir -r ../requirements.txt
 ENV PYTHONPATH /usr/src/app/github.com/kubeflow/katib:/usr/src/app/github.com/kubeflow/katib/pkg/api/v1alpha1/python
 
