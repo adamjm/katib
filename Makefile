@@ -1,6 +1,6 @@
 # Run tests
 
-ARCH ?= $(uname -m)
+ARCH ?= $(shell uname -m)
 
 test:
 	go test ./pkg/... ./cmd/...
